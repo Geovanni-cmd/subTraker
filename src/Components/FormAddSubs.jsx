@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FormAddSubs = ({ setType, setPrice, type, price, setSubs, subs }) => {
+const FormAddSubs = ({ setType, setPrice, type, price, setSubs, subs, editId, setEditId, spent, count}) => {
     const [error, setError] = useState(false)
 
     const handleSubs = e => {
@@ -9,16 +9,34 @@ const FormAddSubs = ({ setType, setPrice, type, price, setSubs, subs }) => {
             setError(true);
             return
         }
-        setError(false)
-        const data = {
-            type: type,
-            price: price,
-            id: Date.now()
-        }
 
-        setSubs([...subs, data])
-        setType("")
-        setPrice("")
+        /*if(count){
+
+        }*/
+
+        setError(false)
+        if(editId != ""){
+            setEditId("");
+            const newSubs =subs.map(item => {
+                if(item.id == editId){
+                    item.type = type;
+                    item.price = price;
+                }
+                return item;
+            })
+            setSubs(newSubs);
+        } else {
+            const data = {
+                type: type,
+                price: price,
+                id: Date.now()
+            }
+            setSubs([...subs, data])
+            setType("")
+            setPrice("")
+    
+        }
+        
 
         /*console.log(type)
         console.log(price)*/
@@ -45,9 +63,9 @@ const FormAddSubs = ({ setType, setPrice, type, price, setSubs, subs }) => {
                     <p className="is-size-5 has-text-weight-bold">Cantidad</p>
 
                     <input className="input is-primary is-rounded mt-2" type="number" placeholder="$20" onChange={e => setPrice(e.target.value)} value={price} />
-
-                    <input className="button mt-2" type="submit" value="Agregar" />
-
+                    {editId != '' ?  <input className="button mt-2" type="submit" value="Guardar"/>
+                                    :   <input className="button mt-2" type="submit" value="Agregar" />}
+                    
                 </form>
                 {error ? <p className="error">Campos invalidos</p> : null}
 

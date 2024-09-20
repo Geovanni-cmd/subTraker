@@ -1,6 +1,6 @@
 import SingleItem from "./SingleItem";
 
-const DisplayItems = ({subs}) => {
+const DisplayItems = ({subs, eliminarItem, editItem}) => {
     return ( 
         <>
             <div>
@@ -12,6 +12,8 @@ const DisplayItems = ({subs}) => {
                             id={item.id} 
                             price={item.price}
                             type={item.type}
+                            eliminarItem={eliminarItem}
+                            editItem={editItem}
                         />
                     ))
                 }

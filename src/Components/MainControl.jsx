@@ -10,6 +10,8 @@ const MainControl = ({ count }) => {
     const [editId, setEditId] = useState("")
     const[spent, setSpent] = useState(0);
 
+    //Comentario
+
 
     const eliminarItem = id => {
         const newList = subs.filter(item => item.id != id);

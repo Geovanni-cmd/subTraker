@@ -9,6 +9,7 @@ const FormAddSubs = ({ setType, setPrice, type, price, setSubs, subs, editId, se
             setError(true);
             return
         }
+        //Informacion de visita
 
         /*if(count){
 
